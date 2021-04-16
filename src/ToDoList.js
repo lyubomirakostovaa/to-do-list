@@ -24,12 +24,15 @@ class ToDoList extends Component {
         };
 
         let newList = [...this.state.list];
-        newList.push(newItem);
 
-        this.setState({
-                          list: newList,
-                          item: ""
-                      });
+        if (newItem.value !== "") {
+            newList.push(newItem);
+
+            this.setState({
+                              list: newList,
+                              item: ""
+                          });
+        }
     }
 
     deleteItem(id) {
@@ -47,31 +50,35 @@ class ToDoList extends Component {
         return (
             <div>
                 <h1>My List</h1>
-                <label>What is next? </label>
-                <br/>
-                <input
-                    type="text"
-                    placeholder="Type an item here..."
-                    value={this.state.item}
-                    onChange={e => this.updateInput("item", e.target.value)}/>
+                <div className="list">
+                    <h2>What is next? </h2>
+                    <br/>
+                    <input
+                        type="text"
+                        placeholder="Type an item here..."
+                        value={this.state.item}
+                        onChange={e => this.updateInput("item", e.target.value)}/>
 
 
-                <button onClick={() => this.addItem()}> Add
-                < /button>
+                    <button onClick={() => this.addItem()}> Add
+                    < /button>
 
-                <ul>
-                    {this.state.list.map(item => {
-                                             return (
-                                                 <li key={item.id}>
-                                                     {item.value}
-                                                     <button onClick={() => this.deleteItem(item.id)}>x</button>
-                                                 </li>
-                                             )
-                                         }
-                    )
-                    }
+                    <ul>
+                        {this.state.list.map(item => {
+                                                 return (
+                                                     <li key={item.id}>
+                                                         {item.value}
+                                                         <button className="delete"
+                                                                 onClick={() => this.deleteItem(item.id)}>x
+                                                         </button>
+                                                     </li>
+                                                 )
+                                             }
+                        )
+                        }
 
-                </ul>
+                    </ul>
+                </div>
 
             </div>
         );
