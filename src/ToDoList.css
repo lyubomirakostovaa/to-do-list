@@ -31,10 +31,12 @@ button {
     width: 30px;
     margin: 5px;
     border-radius: 25px;
+    padding: 5px;
 }
 
 button.delete {
-    width: auto;
+    width: 30px;
+    padding: 3px;
 }
 
 button:hover {
@@ -48,6 +50,8 @@ ul {
 
 input {
     width: 40%;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 .inputField {
