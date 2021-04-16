@@ -5,9 +5,24 @@ class ToDoList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            list: [],
+            list: this.getLocalStorage(),
             item: ""
         }
+
+    }
+
+    getLocalStorage() {
+        let localList = JSON.parse(localStorage.getItem("list")) || [];
+        let values = [];
+        localList.forEach((item) => values.push({
+                                                    value: item.value,
+                                                    id: item.id
+                                                }));
+        return values;
+    }
+
+    saveToLocalStorage(list) {
+        localStorage.setItem("list", JSON.stringify(list));
     }
 
     updateInput(key, value) {
@@ -17,22 +32,22 @@ class ToDoList extends Component {
     }
 
     addItem() {
-
         let newItem = {
             id: 1 + Math.random(),
             value: this.state.item.slice()
         };
 
-        let newList = [...this.state.list];
+        let updatedList = [...this.state.list];
 
         if (newItem.value !== "") {
-            newList.push(newItem);
+            updatedList.push(newItem);
 
             this.setState({
-                              list: newList,
+                              list: updatedList,
                               item: ""
                           });
         }
+        this.saveToLocalStorage(updatedList);
     }
 
     deleteItem(id) {
@@ -43,7 +58,7 @@ class ToDoList extends Component {
         this.setState({
                           list: updatedList
                       })
-
+        this.saveToLocalStorage(updatedList);
     }
 
     render() {
