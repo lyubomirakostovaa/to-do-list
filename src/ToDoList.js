@@ -51,18 +51,18 @@ class ToDoList extends Component {
             <div>
                 <h1>My List</h1>
                 <div className="list">
-                    <h2>What is next? </h2>
+                    <h2>What is the plan for today? </h2>
                     <br/>
-                    <input
-                        type="text"
-                        placeholder="Type an item here..."
-                        value={this.state.item}
-                        onChange={e => this.updateInput("item", e.target.value)}/>
+                    <div className="inputField">
+                        <input
+                            type="text"
+                            placeholder="Type an item here..."
+                            value={this.state.item}
+                            onChange={e => this.updateInput("item", e.target.value)}/>
 
 
-                    <button onClick={() => this.addItem()}> Add
-                    < /button>
-
+                        <button onClick={() => this.addItem()}>+< /button>
+                    </div>
                     <ul>
                         {this.state.list.map(item => {
                                                  return (
